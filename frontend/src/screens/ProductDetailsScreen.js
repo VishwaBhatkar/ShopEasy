@@ -6,11 +6,11 @@ import {
   Image,
   ScrollView,
   TouchableOpacity,
-  SafeAreaView,
   StatusBar,
   Dimensions,
   Platform
 } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
 import Colors from '../constants/colors';
 import Header from '../components/Header';
@@ -66,7 +66,7 @@ export default function ProductDetailsScreen({ route, navigation }) {
 
   if (isLoading) {
     return (
-      <SafeAreaView style={styles.safeArea}>
+      <SafeAreaView style={styles.safeArea} edges={['top', 'bottom', 'left', 'right']}>
         <Header title="Product Details" showBack={true} />
         <LoadingView loading={true} message="Loading details..." />
       </SafeAreaView>
@@ -75,7 +75,7 @@ export default function ProductDetailsScreen({ route, navigation }) {
 
   if (error || !product) {
     return (
-      <SafeAreaView style={styles.safeArea}>
+      <SafeAreaView style={styles.safeArea} edges={['top', 'bottom', 'left', 'right']}>
         <Header title="Product Details" showBack={true} />
         <LoadingView
           error={error || 'Product not found'}
@@ -86,7 +86,7 @@ export default function ProductDetailsScreen({ route, navigation }) {
   }
 
   return (
-    <SafeAreaView style={styles.safeArea}>
+    <SafeAreaView style={styles.safeArea} edges={['top', 'bottom', 'left', 'right']}>
       <StatusBar barStyle="dark-content" backgroundColor={Colors.background} />
       <Header title="Product Details" showBack={true} showCart={true} />
 

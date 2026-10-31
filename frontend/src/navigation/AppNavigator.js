@@ -15,6 +15,7 @@ import ProfileScreen from '../screens/ProfileScreen';
 import Colors from '../constants/colors';
 import { useCart } from '../context/CartContext';
 import { useAuth } from '../context/AuthContext';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -25,6 +26,9 @@ const Tab = createBottomTabNavigator();
 function MainTabs() {
   const { cartCount } = useCart();
   const { isAuthenticated } = useAuth();
+  const insets = useSafeAreaInsets();
+
+  const bottomInset = Math.max(insets.bottom, Platform.OS === 'ios' ? 20 : 8);
 
   return (
     <Tab.Navigator
@@ -36,8 +40,8 @@ function MainTabs() {
           backgroundColor: Colors.background,
           borderTopWidth: 1,
           borderTopColor: Colors.borderLight,
-          height: Platform.OS === 'ios' ? 86 : 64,
-          paddingBottom: Platform.OS === 'ios' ? 24 : 10,
+          height: 56 + bottomInset,
+          paddingBottom: bottomInset,
           paddingTop: 8,
           ...Platform.select({
             ios: {
